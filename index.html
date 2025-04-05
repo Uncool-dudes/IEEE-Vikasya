@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vikasya Hackathon - IEEE RVU SB</title>
     <style>
         :root {
-            --black: #121212;
+            --black: #462023;
             --gold: #D4AF37;
             --white: #F5F5F5;
-            --light-red: #FF6B6B;
+            --light-red: #951626;
         }
 
         * {
@@ -50,6 +51,23 @@
             overflow: hidden;
         }
 
+        .ieee-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ieee-logo img {
+            max-height: 120px;
+            transition: transform 0.3s;
+        }
+
+        .ieee-logo img:hover {
+            transform: scale(1.05);
+        }
+
+
+
         .header-content {
             display: flex;
             justify-content: space-between;
@@ -59,11 +77,9 @@
         }
 
         .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            rotate: 90deg;
+            width: 50px;
+            height: 50px;
             margin-bottom: 10px;
         }
 
@@ -351,6 +367,10 @@
                 text-align: center;
             }
 
+            .ieee-logo {
+                margin-top: 15px;
+            }
+
             nav ul {
                 flex-direction: column;
                 align-items: center;
@@ -426,17 +446,38 @@
             max-height: 1000px;
             transition: max-height 0.5s ease-in;
         }
+
+        .vikasya-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+
+        .vikasya-logo img {
+            width: 150px;
+            height: fit-content;
+            rotate: 90deg;
+            transition: transform 0.3s;
+        }
+
+        .vikasya-logo img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
+
 <body>
     <div class="flame-overlay"></div>
 
     <header id="home">
         <div class="container">
             <div class="header-content">
-                <div>
-                    <div class="logo">Vikasya</div>
-                    <div class="tagline">Ignite. Innovate. Inspire.</div>
+                <div class="vikasya-logo-container">
+                    <div class="vikasya-logo">
+                        <img src="./Vikasya_logo_svg3.svg" alt="Vikasya Logo" />
+                    </div>
+                    <!-- <div class="tagline">Ignite. Innovate. Inspire.</div> -->
                 </div>
                 <nav>
                     <ul>
@@ -447,13 +488,17 @@
                         <li><a href="#problems">Problems</a></li>
                     </ul>
                 </nav>
+                <div class="ieee-logo">
+                    <img src="./ieee-logo.webp" alt="IEEE SB Logo" />
+                </div>
             </div>
         </div>
     </header>
 
     <section class="hero">
         <h1>Vikasya Hackathon</h1>
-        <p>48 hours of innovation, collaboration, and breakthrough solutions. Join us in this technical extravaganza organized by IEEE RVU SB.</p>
+        <p>10 hours of innovation, collaboration, and breakthrough solutions. Join us in this technical extravaganza
+            organized by IEEE RVU SB.</p>
         <button class="cta-button">Register Now</button>
     </section>
 
@@ -463,8 +508,14 @@
             <div class="about-content">
                 <div class="about-text">
                     <h3>Vikasya: A Journey of Technical Excellence</h3>
-                    <p>Vikasya is a premier hackathon organized by IEEE RVU Student Branch, designed to challenge participants to develop innovative solutions to real-world problems. The name "Vikasya" symbolizes growth and development, representing our commitment to fostering technical excellence and creativity.</p>
-                    <p>This hackathon brings together the brightest minds to collaborate, ideate, and build solutions that have the potential to create significant impact. Whether you're a coding expert, a design enthusiast, or a problem solver, Vikasya offers you the platform to showcase your skills and push your boundaries.</p>
+                    <p>Vikasya is a premier hackathon organized by IEEE RVU Student Branch, designed to challenge
+                        participants to develop innovative solutions to real-world problems. The name "Vikasya"
+                        symbolizes growth and development, representing our commitment to fostering technical excellence
+                        and creativity.</p>
+                    <p>This hackathon brings together the brightest minds to collaborate, ideate, and build solutions
+                        that have the potential to create significant impact. Whether you're a coding expert, a design
+                        enthusiast, or a problem solver, Vikasya offers you the platform to showcase your skills and
+                        push your boundaries.</p>
                 </div>
                 <div class="about-image"></div>
             </div>
@@ -473,8 +524,13 @@
                 <div class="about-image"></div>
                 <div class="about-text">
                     <h3>About IEEE RVU Student Branch</h3>
-                    <p>IEEE RVU Student Branch is a dynamic community of engineering students dedicated to advancing technology for humanity. Established with the vision to create a platform for students to enhance their technical knowledge and professional skills, IEEE RVU SB has been at the forefront of organizing impactful technical events.</p>
-                    <p>Our mission is to inspire, educate, and empower the next generation of innovators and leaders in technology. Through workshops, seminars, competitions, and hackathons like Vikasya, we aim to bridge the gap between academic learning and industry requirements.</p>
+                    <p>IEEE RVU Student Branch is a dynamic community of engineering students dedicated to advancing
+                        technology for humanity. Established with the vision to create a platform for students to
+                        enhance their technical knowledge and professional skills, IEEE RVU SB has been at the forefront
+                        of organizing impactful technical events.</p>
+                    <p>Our mission is to inspire, educate, and empower the next generation of innovators and leaders in
+                        technology. Through workshops, seminars, competitions, and hackathons like Vikasya, we aim to
+                        bridge the gap between academic learning and industry requirements.</p>
                 </div>
             </div>
 
@@ -505,10 +561,13 @@
             <div class="rounds">
                 <div class="round-card">
                     <h3>Round 1: Ideation Challenge</h3>
-                    <p>The first round focuses on idea generation and conceptualization. Teams will submit their project proposals addressing one of the provided problem statements.</p>
+                    <p>The first round focuses on idea generation and conceptualization. Teams will submit their project
+                        proposals addressing one of the provided problem statements.</p>
                     <p><strong>Duration:</strong> 24 hours</p>
-                    <p><strong>Submission Requirements:</strong> Project abstract, feasibility analysis, and basic prototype design.</p>
-                    <p><strong>Judging Criteria:</strong> Innovation, feasibility, impact, and alignment with the problem statement.</p>
+                    <p><strong>Submission Requirements:</strong> Project abstract, feasibility analysis, and basic
+                        prototype design.</p>
+                    <p><strong>Judging Criteria:</strong> Innovation, feasibility, impact, and alignment with the
+                        problem statement.</p>
                     <button class="toggle-button" onclick="toggleContent('round1-details')">View Details</button>
                     <div id="round1-details" class="toggle-content">
                         <p>In this round, teams will:</p>
@@ -519,16 +578,20 @@
                             <li>Prepare a 3-minute pitch video explaining their concept</li>
                             <li>Submit all required documents through the hackathon portal</li>
                         </ul>
-                        <p>Top 20 teams will advance to Round 2 based on the evaluation by our expert panel of judges.</p>
+                        <p>Top 20 teams will advance to Round 2 based on the evaluation by our expert panel of judges.
+                        </p>
                     </div>
                 </div>
 
                 <div class="round-card">
                     <h3>Round 2: Build & Deploy</h3>
-                    <p>The second round is where ideas transform into reality. Selected teams will build a working prototype of their solution and present it to the judges.</p>
+                    <p>The second round is where ideas transform into reality. Selected teams will build a working
+                        prototype of their solution and present it to the judges.</p>
                     <p><strong>Duration:</strong> 24 hours</p>
-                    <p><strong>Submission Requirements:</strong> Working prototype, technical documentation, and presentation.</p>
-                    <p><strong>Judging Criteria:</strong> Functionality, technical complexity, user experience, and presentation.</p>
+                    <p><strong>Submission Requirements:</strong> Working prototype, technical documentation, and
+                        presentation.</p>
+                    <p><strong>Judging Criteria:</strong> Functionality, technical complexity, user experience, and
+                        presentation.</p>
                     <button class="toggle-button" onclick="toggleContent('round2-details')">View Details</button>
                     <div id="round2-details" class="toggle-content">
                         <p>In this round, teams will:</p>
@@ -539,7 +602,8 @@
                             <li>Deliver a 5-minute final presentation followed by Q&A</li>
                             <li>Demonstrate the working prototype to judges and attendees</li>
                         </ul>
-                        <p>Winners will be selected based on the final evaluation, with emphasis on innovation, execution, and potential impact.</p>
+                        <p>Winners will be selected based on the final evaluation, with emphasis on innovation,
+                            execution, and potential impact.</p>
                     </div>
                 </div>
             </div>
@@ -570,7 +634,8 @@
                     <li>Abstract must not exceed 500 words.</li>
                     <li>Ideation submissions must be made before the round 1 deadline.</li>
                     <li>Each team is allowed to submit only one proposal.</li>
-                    <li>The proposal must include a clear problem statement, solution approach, technology stack, and implementation plan.</li>
+                    <li>The proposal must include a clear problem statement, solution approach, technology stack, and
+                        implementation plan.</li>
                     <li>Teams must indicate any external dependencies or resources required for their solution.</li>
                     <li>Initial designs or wireframes must be included in the submission.</li>
                     <li>Teams are encouraged to think about scalability and sustainability of their solutions.</li>
@@ -585,7 +650,8 @@
                     <li>All team members must be present during the final presentation.</li>
                     <li>The working prototype must demonstrate the core functionality described in the proposal.</li>
                     <li>Teams must submit their code to a GitHub repository and make it accessible to judges.</li>
-                    <li>Technical documentation must include setup instructions, API references, and architecture diagrams.</li>
+                    <li>Technical documentation must include setup instructions, API references, and architecture
+                        diagrams.</li>
                     <li>Teams must be able to answer technical questions about their implementation.</li>
                     <li>The final presentation should not exceed 5 minutes, followed by a 3-minute Q&A session.</li>
                     <li>Any use of AI tools must be disclosed and explained in the documentation.</li>
@@ -602,7 +668,9 @@
             <div class="problem-statement">
                 <h3>Smart Urban Transportation System</h3>
                 <div class="domain">Domain: IoT & Smart Cities</div>
-                <p>Design and develop an intelligent transportation system that addresses urban mobility challenges. Your solution should integrate real-time data analytics, IoT devices, and user-friendly interfaces to optimize traffic flow, reduce congestion, and enhance the overall commuting experience.</p>
+                <p>Design and develop an intelligent transportation system that addresses urban mobility challenges.
+                    Your solution should integrate real-time data analytics, IoT devices, and user-friendly interfaces
+                    to optimize traffic flow, reduce congestion, and enhance the overall commuting experience.</p>
                 <p>Key considerations:</p>
                 <ul>
                     <li>Real-time traffic monitoring and prediction</li>
@@ -621,14 +689,19 @@
                         <li>User interface mockups or working frontend</li>
                         <li>Implementation roadmap with scalability considerations</li>
                     </ul>
-                    <p>This challenge encourages innovative solutions that leverage emerging technologies to create smarter, more efficient urban transportation systems that benefit both individual commuters and the broader urban ecosystem.</p>
+                    <p>This challenge encourages innovative solutions that leverage emerging technologies to create
+                        smarter, more efficient urban transportation systems that benefit both individual commuters and
+                        the broader urban ecosystem.</p>
                 </div>
             </div>
 
             <div class="problem-statement">
                 <h3>AI-Powered Healthcare Assistant</h3>
                 <div class="domain">Domain: Healthcare & AI</div>
-                <p>Develop an intelligent healthcare assistant that enhances patient care through personalized monitoring, early diagnosis support, and treatment adherence. Your solution should leverage artificial intelligence, machine learning, and data analytics to provide meaningful insights to both patients and healthcare providers.</p>
+                <p>Develop an intelligent healthcare assistant that enhances patient care through personalized
+                    monitoring, early diagnosis support, and treatment adherence. Your solution should leverage
+                    artificial intelligence, machine learning, and data analytics to provide meaningful insights to both
+                    patients and healthcare providers.</p>
                 <p>Key considerations:</p>
                 <ul>
                     <li>Health data collection and analysis</li>
@@ -647,14 +720,18 @@
                         <li>Integration plan with existing healthcare systems</li>
                         <li>Performance metrics and validation results</li>
                     </ul>
-                    <p>This challenge seeks innovative solutions that can revolutionize healthcare delivery, improve patient outcomes, and reduce the burden on healthcare systems through intelligent, technology-driven approaches.</p>
+                    <p>This challenge seeks innovative solutions that can revolutionize healthcare delivery, improve
+                        patient outcomes, and reduce the burden on healthcare systems through intelligent,
+                        technology-driven approaches.</p>
                 </div>
             </div>
 
             <div class="problem-statement">
                 <h3>Sustainable Agriculture Technology</h3>
                 <div class="domain">Domain: AgriTech & Sustainability</div>
-                <p>Create a technology-driven solution to enhance agricultural productivity while promoting sustainable farming practices. Your solution should address challenges such as resource optimization, crop monitoring, climate resilience, and supply chain efficiency.</p>
+                <p>Create a technology-driven solution to enhance agricultural productivity while promoting sustainable
+                    farming practices. Your solution should address challenges such as resource optimization, crop
+                    monitoring, climate resilience, and supply chain efficiency.</p>
                 <p>Key considerations:</p>
                 <ul>
                     <li>Precision farming techniques and technologies</li>
@@ -673,14 +750,18 @@
                         <li>User interface for farmers and other stakeholders</li>
                         <li>Scalability and adoption strategy</li>
                     </ul>
-                    <p>This challenge encourages participants to develop innovative solutions that can transform agricultural practices, enhance food security, and contribute to environmental sustainability through the thoughtful application of technology.</p>
+                    <p>This challenge encourages participants to develop innovative solutions that can transform
+                        agricultural practices, enhance food security, and contribute to environmental sustainability
+                        through the thoughtful application of technology.</p>
                 </div>
             </div>
 
             <div class="problem-statement">
                 <h3>Cybersecurity Defense System</h3>
                 <div class="domain">Domain: Cybersecurity & Network Protection</div>
-                <p>Design and implement an advanced cybersecurity defense system that can detect, analyze, and mitigate emerging threats in real-time. Your solution should leverage cutting-edge technologies to protect digital infrastructure from sophisticated cyber attacks.</p>
+                <p>Design and implement an advanced cybersecurity defense system that can detect, analyze, and mitigate
+                    emerging threats in real-time. Your solution should leverage cutting-edge technologies to protect
+                    digital infrastructure from sophisticated cyber attacks.</p>
                 <p>Key considerations:</p>
                 <ul>
                     <li>Real-time threat detection and analysis</li>
@@ -699,7 +780,9 @@
                         <li>Performance metrics and testing results</li>
                         <li>Implementation and integration guidelines</li>
                     </ul>
-                    <p>This challenge invites innovative approaches to cybersecurity that can keep pace with the evolving threat landscape and protect critical digital assets against sophisticated attacks, enhancing overall digital resilience.</p>
+                    <p>This challenge invites innovative approaches to cybersecurity that can keep pace with the
+                        evolving threat landscape and protect critical digital assets against sophisticated attacks,
+                        enhancing overall digital resilience.</p>
                 </div>
             </div>
         </div>
@@ -719,10 +802,9 @@
                     </ul>
                 </div>
                 <div class="social-links">
-                    <a href="#">FB</a>
-                    <a href="#">TW</a>
-                    <a href="#">IG</a>
-                    <a href="#">LI</a>
+                    <a href="#">
+                        <img src="./Unstop-Logo-Blue.svg" alt="Facebook" height="40">
+                    </a>
                 </div>
             </div>
             <div class="copyright">
@@ -789,7 +871,7 @@
 
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
 
                 const targetId = this.getAttribute('href');
@@ -805,4 +887,5 @@
         });
     </script>
 </body>
+
 </html>
