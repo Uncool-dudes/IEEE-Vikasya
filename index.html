@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikasya Hackathon - IEEE RVU SB</title>
+    <style>
+        :root {
+            --black: #121212;
+            --gold: #D4AF37;
+            --white: #F5F5F5;
+            --light-red: #FF6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .flame-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./bg.jpg') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--light-red);
+            font-style: italic;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: var(--light-red);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--light-red);
+        }
+
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: url('/api/placeholder/600/400') center/cover no-repeat;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .rounds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .round-card {
+            background-color: rgba(18, 18, 18, 0.8);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .round-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .round-card h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .round-card p {
+            margin-bottom: 20px;
+        }
+
+        .rules-list {
+            margin-bottom: 30px;
+        }
+
+        .rules-list h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .rules-list ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .rules-list li {
+            margin-bottom: 10px;
+        }
+
+        .problem-statement {
+            background-color: rgba(18, 18, 18, 0.8);
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+
+        .problem-statement:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-statement h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .problem-statement .domain {
+            color: var(--light-red);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .footer-links ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Dynamic Elements */
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .counter-label {
+            font-size: 1.2rem;
+            color: var(--light-red);
+        }
+
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        .toggle-button {
+            background-color: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .toggle-button:hover {
+            background-color: var(--gold);
+            color: var(--black);
+        }
+
+        .active-toggle {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <div class="flame-overlay"></div>
+
+    <header id="home">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <div class="logo">Vikasya</div>
+                    <div class="tagline">Ignite. Innovate. Inspire.</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#rounds">Rounds</a></li>
+                        <li><a href="#rules">Rules</a></li>
+                        <li><a href="#problems">Problems</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Vikasya Hackathon</h1>
+        <p>48 hours of innovation, collaboration, and breakthrough solutions. Join us in this technical extravaganza organized by IEEE RVU SB.</p>
+        <button class="cta-button">Register Now</button>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About the Hackathon</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Vikasya: A Journey of Technical Excellence</h3>
+                    <p>Vikasya is a premier hackathon organized by IEEE RVU Student Branch, designed to challenge participants to develop innovative solutions to real-world problems. The name "Vikasya" symbolizes growth and development, representing our commitment to fostering technical excellence and creativity.</p>
+                    <p>This hackathon brings together the brightest minds to collaborate, ideate, and build solutions that have the potential to create significant impact. Whether you're a coding expert, a design enthusiast, or a problem solver, Vikasya offers you the platform to showcase your skills and push your boundaries.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+
+            <div class="about-content" style="margin-top: 80px;">
+                <div class="about-image"></div>
+                <div class="about-text">
+                    <h3>About IEEE RVU Student Branch</h3>
+                    <p>IEEE RVU Student Branch is a dynamic community of engineering students dedicated to advancing technology for humanity. Established with the vision to create a platform for students to enhance their technical knowledge and professional skills, IEEE RVU SB has been at the forefront of organizing impactful technical events.</p>
+                    <p>Our mission is to inspire, educate, and empower the next generation of innovators and leaders in technology. Through workshops, seminars, competitions, and hackathons like Vikasya, we aim to bridge the gap between academic learning and industry requirements.</p>
+                </div>
+            </div>
+
+            <div class="counter-container">
+                <div class="counter-item">
+                    <div class="counter" id="participants-counter">0</div>
+                    <div class="counter-label">Participants</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter" id="teams-counter">0</div>
+                    <div class="counter-label">Teams</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter" id="hours-counter">0</div>
+                    <div class="counter-label">Hours</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter" id="prizes-counter">0</div>
+                    <div class="counter-label">Prizes Worth</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rounds" class="rounds-section">
+        <div class="container">
+            <h2 class="section-title">Hackathon Rounds</h2>
+            <div class="rounds">
+                <div class="round-card">
+                    <h3>Round 1: Ideation Challenge</h3>
+                    <p>The first round focuses on idea generation and conceptualization. Teams will submit their project proposals addressing one of the provided problem statements.</p>
+                    <p><strong>Duration:</strong> 24 hours</p>
+                    <p><strong>Submission Requirements:</strong> Project abstract, feasibility analysis, and basic prototype design.</p>
+                    <p><strong>Judging Criteria:</strong> Innovation, feasibility, impact, and alignment with the problem statement.</p>
+                    <button class="toggle-button" onclick="toggleContent('round1-details')">View Details</button>
+                    <div id="round1-details" class="toggle-content">
+                        <p>In this round, teams will:</p>
+                        <ul>
+                            <li>Choose one problem statement from the provided list</li>
+                            <li>Develop a comprehensive project proposal</li>
+                            <li>Create wireframes or mockups of the proposed solution</li>
+                            <li>Prepare a 3-minute pitch video explaining their concept</li>
+                            <li>Submit all required documents through the hackathon portal</li>
+                        </ul>
+                        <p>Top 20 teams will advance to Round 2 based on the evaluation by our expert panel of judges.</p>
+                    </div>
+                </div>
+
+                <div class="round-card">
+                    <h3>Round 2: Build & Deploy</h3>
+                    <p>The second round is where ideas transform into reality. Selected teams will build a working prototype of their solution and present it to the judges.</p>
+                    <p><strong>Duration:</strong> 24 hours</p>
+                    <p><strong>Submission Requirements:</strong> Working prototype, technical documentation, and presentation.</p>
+                    <p><strong>Judging Criteria:</strong> Functionality, technical complexity, user experience, and presentation.</p>
+                    <button class="toggle-button" onclick="toggleContent('round2-details')">View Details</button>
+                    <div id="round2-details" class="toggle-content">
+                        <p>In this round, teams will:</p>
+                        <ul>
+                            <li>Develop a functional prototype of their proposed solution</li>
+                            <li>Create comprehensive technical documentation</li>
+                            <li>Prepare a business model and scaling plan</li>
+                            <li>Deliver a 5-minute final presentation followed by Q&A</li>
+                            <li>Demonstrate the working prototype to judges and attendees</li>
+                        </ul>
+                        <p>Winners will be selected based on the final evaluation, with emphasis on innovation, execution, and potential impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rules" class="rules">
+        <div class="container">
+            <h2 class="section-title">Rules & Regulations</h2>
+
+            <div class="rules-list">
+                <h3>General Rules</h3>
+                <ul>
+                    <li>Teams must consist of 2-4 members.</li>
+                    <li>All team members must be enrolled in an undergraduate or postgraduate program.</li>
+                    <li>Cross-college teams are allowed and encouraged.</li>
+                    <li>All code and designs must be created during the hackathon duration.</li>
+                    <li>Use of open-source libraries and APIs is permitted with proper attribution.</li>
+                    <li>Plagiarism or use of pre-existing projects will result in immediate disqualification.</li>
+                    <li>The decision of the judges will be final and binding.</li>
+                </ul>
+            </div>
+
+            <div class="rules-list">
+                <h3>Round 1 Specific Rules</h3>
+                <ul>
+                    <li>Teams must choose one problem statement from the provided list.</li>
+                    <li>Abstract must not exceed 500 words.</li>
+                    <li>Ideation submissions must be made before the round 1 deadline.</li>
+                    <li>Each team is allowed to submit only one proposal.</li>
+                    <li>The proposal must include a clear problem statement, solution approach, technology stack, and implementation plan.</li>
+                    <li>Teams must indicate any external dependencies or resources required for their solution.</li>
+                    <li>Initial designs or wireframes must be included in the submission.</li>
+                    <li>Teams are encouraged to think about scalability and sustainability of their solutions.</li>
+                </ul>
+            </div>
+
+            <div class="rules-list">
+                <h3>Round 2 Specific Rules</h3>
+                <ul>
+                    <li>Only selected teams from Round 1 will participate in Round 2.</li>
+                    <li>Teams must continue with the same project idea approved in Round 1.</li>
+                    <li>All team members must be present during the final presentation.</li>
+                    <li>The working prototype must demonstrate the core functionality described in the proposal.</li>
+                    <li>Teams must submit their code to a GitHub repository and make it accessible to judges.</li>
+                    <li>Technical documentation must include setup instructions, API references, and architecture diagrams.</li>
+                    <li>Teams must be able to answer technical questions about their implementation.</li>
+                    <li>The final presentation should not exceed 5 minutes, followed by a 3-minute Q&A session.</li>
+                    <li>Any use of AI tools must be disclosed and explained in the documentation.</li>
+                    <li>Solutions must be deployable and demonstrate real-world applicability.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="problems" class="problems">
+        <div class="container">
+            <h2 class="section-title">Problem Statements</h2>
+
+            <div class="problem-statement">
+                <h3>Smart Urban Transportation System</h3>
+                <div class="domain">Domain: IoT & Smart Cities</div>
+                <p>Design and develop an intelligent transportation system that addresses urban mobility challenges. Your solution should integrate real-time data analytics, IoT devices, and user-friendly interfaces to optimize traffic flow, reduce congestion, and enhance the overall commuting experience.</p>
+                <p>Key considerations:</p>
+                <ul>
+                    <li>Real-time traffic monitoring and prediction</li>
+                    <li>Integration with existing transportation infrastructure</li>
+                    <li>Optimization algorithms for route planning</li>
+                    <li>User-friendly mobile application for commuters</li>
+                    <li>Sustainability and environmental impact</li>
+                </ul>
+                <button class="toggle-button" onclick="toggleContent('problem1-details')">View More Details</button>
+                <div id="problem1-details" class="toggle-content">
+                    <p>Expected Deliverables:</p>
+                    <ul>
+                        <li>A functional prototype demonstrating the core features</li>
+                        <li>System architecture design</li>
+                        <li>Data flow and processing mechanisms</li>
+                        <li>User interface mockups or working frontend</li>
+                        <li>Implementation roadmap with scalability considerations</li>
+                    </ul>
+                    <p>This challenge encourages innovative solutions that leverage emerging technologies to create smarter, more efficient urban transportation systems that benefit both individual commuters and the broader urban ecosystem.</p>
+                </div>
+            </div>
+
+            <div class="problem-statement">
+                <h3>AI-Powered Healthcare Assistant</h3>
+                <div class="domain">Domain: Healthcare & AI</div>
+                <p>Develop an intelligent healthcare assistant that enhances patient care through personalized monitoring, early diagnosis support, and treatment adherence. Your solution should leverage artificial intelligence, machine learning, and data analytics to provide meaningful insights to both patients and healthcare providers.</p>
+                <p>Key considerations:</p>
+                <ul>
+                    <li>Health data collection and analysis</li>
+                    <li>Personalized health insights and recommendations</li>
+                    <li>Early warning systems for potential health issues</li>
+                    <li>Medication and treatment adherence tracking</li>
+                    <li>Privacy and security of sensitive health information</li>
+                </ul>
+                <button class="toggle-button" onclick="toggleContent('problem2-details')">View More Details</button>
+                <div id="problem2-details" class="toggle-content">
+                    <p>Expected Deliverables:</p>
+                    <ul>
+                        <li>AI model for health data analysis and prediction</li>
+                        <li>User-friendly interface for patients and healthcare providers</li>
+                        <li>Data security implementation and documentation</li>
+                        <li>Integration plan with existing healthcare systems</li>
+                        <li>Performance metrics and validation results</li>
+                    </ul>
+                    <p>This challenge seeks innovative solutions that can revolutionize healthcare delivery, improve patient outcomes, and reduce the burden on healthcare systems through intelligent, technology-driven approaches.</p>
+                </div>
+            </div>
+
+            <div class="problem-statement">
+                <h3>Sustainable Agriculture Technology</h3>
+                <div class="domain">Domain: AgriTech & Sustainability</div>
+                <p>Create a technology-driven solution to enhance agricultural productivity while promoting sustainable farming practices. Your solution should address challenges such as resource optimization, crop monitoring, climate resilience, and supply chain efficiency.</p>
+                <p>Key considerations:</p>
+                <ul>
+                    <li>Precision farming techniques and technologies</li>
+                    <li>Resource optimization (water, fertilizer, energy)</li>
+                    <li>Climate-smart agricultural practices</li>
+                    <li>Data-driven decision support for farmers</li>
+                    <li>Supply chain transparency and efficiency</li>
+                </ul>
+                <button class="toggle-button" onclick="toggleContent('problem3-details')">View More Details</button>
+                <div id="problem3-details" class="toggle-content">
+                    <p>Expected Deliverables:</p>
+                    <ul>
+                        <li>Functional prototype of the proposed solution</li>
+                        <li>Data collection and analysis methodology</li>
+                        <li>Implementation approach for resource optimization</li>
+                        <li>User interface for farmers and other stakeholders</li>
+                        <li>Scalability and adoption strategy</li>
+                    </ul>
+                    <p>This challenge encourages participants to develop innovative solutions that can transform agricultural practices, enhance food security, and contribute to environmental sustainability through the thoughtful application of technology.</p>
+                </div>
+            </div>
+
+            <div class="problem-statement">
+                <h3>Cybersecurity Defense System</h3>
+                <div class="domain">Domain: Cybersecurity & Network Protection</div>
+                <p>Design and implement an advanced cybersecurity defense system that can detect, analyze, and mitigate emerging threats in real-time. Your solution should leverage cutting-edge technologies to protect digital infrastructure from sophisticated cyber attacks.</p>
+                <p>Key considerations:</p>
+                <ul>
+                    <li>Real-time threat detection and analysis</li>
+                    <li>Automated response and mitigation strategies</li>
+                    <li>Machine learning for anomaly detection</li>
+                    <li>User behavior analytics</li>
+                    <li>Comprehensive security dashboard and reporting</li>
+                </ul>
+                <button class="toggle-button" onclick="toggleContent('problem4-details')">View More Details</button>
+                <div id="problem4-details" class="toggle-content">
+                    <p>Expected Deliverables:</p>
+                    <ul>
+                        <li>Functional security solution demonstrating core capabilities</li>
+                        <li>Detection algorithms and machine learning models</li>
+                        <li>System architecture and data flow diagrams</li>
+                        <li>Performance metrics and testing results</li>
+                        <li>Implementation and integration guidelines</li>
+                    </ul>
+                    <p>This challenge invites innovative approaches to cybersecurity that can keep pace with the evolving threat landscape and protect critical digital assets against sophisticated attacks, enhancing overall digital resilience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Vikasya Hackathon</div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#rounds">Rounds</a></li>
+                        <li><a href="#rules">Rules</a></li>
+                        <li><a href="#problems">Problems</a></li>
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <a href="#">FB</a>
+                    <a href="#">TW</a>
+                    <a href="#">IG</a>
+                    <a href="#">LI</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Vikasya Hackathon | IEEE RVU Student Branch. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Counter Animation
+        function animateCounter(id, endValue) {
+            const counter = document.getElementById(id);
+            let currentValue = 0;
+            const duration = 2000; // 2 seconds
+            const interval = 20; // Update every 20ms
+            const increment = (endValue / (duration / interval));
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if (currentValue >= endValue) {
+                    clearInterval(timer);
+                    currentValue = endValue;
+                }
+
+                if (id === 'prizes-counter') {
+                    counter.textContent = '$' + Math.floor(currentValue).toLocaleString();
+                } else {
+                    counter.textContent = Math.floor(currentValue).toLocaleString();
+                }
+            }, interval);
+        }
+
+        // Toggle function for expandable content
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active-toggle');
+
+            const button = content.previousElementSibling;
+            if (content.classList.contains('active-toggle')) {
+                button.textContent = 'Show Less';
+            } else {
+                button.textContent = 'View More Details';
+            }
+        }
+
+        // Intersection Observer for counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('participants-counter', 500);
+                    animateCounter('teams-counter', 120);
+                    animateCounter('hours-counter', 48);
+                    animateCounter('prizes-counter', 10000);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Start observing the counter container
+        const counterContainer = document.querySelector('.counter-container');
+        if (counterContainer) {
+            counterObserver.observe(counterContainer);
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
